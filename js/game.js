@@ -3,12 +3,9 @@ window.addEvents({
 	{
 		var canvas = $('gameScreen');
 
-		var snakeOptions = {
-			scale: 10
-		};
-		var SNAKE = new Snake(snakeOptions);
+		var SnakeBodyBlock = new Block(10);
 
-		console.log('Depth: ' + SNAKE.getScale());
-		console.log('Shape: ' + SNAKE.getGraphicShape());
+		console.log(SnakeBodyBlock);
+		console.log(SnakeBodyBlock.getGraphicBlock());
 	}
 });
