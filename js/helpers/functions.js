@@ -49,5 +49,5 @@ function isCanvas(element)
 		return false;
 	}
 
-	return tag === 'CANVAS';
+	return tag == 'CANVAS' || tag == 'canvas';
 }

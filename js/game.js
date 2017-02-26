@@ -3,9 +3,19 @@ window.addEvents({
 	{
 		var canvas = $('gameScreen');
 
-		var SnakeBodyBlock = new Block(10);
+		var screenOptions = {
+			size: {
+				height: 600,
+				width: 600
+			}
+		};
 
-		console.log(SnakeBodyBlock);
-		console.log(SnakeBodyBlock.getGraphicBlock());
+		var screen = new Screen(canvas, screenOptions);
+
+
+		console.log(screen.draw());
+		console.log(screen.setSnakeColor('#dedede'));
+		console.log(screen.draw());
+
 	}
 });
