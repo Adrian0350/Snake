@@ -1,10 +1,14 @@
 window.addEvents({
 	domready: function()
 	{
-		console.log($('gameScreen'));
 		var canvas = $('gameScreen');
-		
 
+		var snakeOptions = {
+			scale: 10
+		};
+		var SNAKE = new Snake(snakeOptions);
 
+		console.log('Depth: ' + SNAKE.getScale());
+		console.log('Shape: ' + SNAKE.getGraphicShape());
 	}
 });
