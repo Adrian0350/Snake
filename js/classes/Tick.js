@@ -39,7 +39,7 @@ var Tick = new Class({
 		if (!ticks || ticks < 0)
 		{
 			console.warn('Ticks must be in the range of 1-64.\n  Set to default: ' + DEFAULT_TICKS_PER_SECOND);
-			this.ticks = TIME_SECOND / EFAULT_TICKS_PER_SECOND;
+			this.ticks = TIME_SECOND / DEFAULT_TICKS_PER_SECOND;
 		}
 		else
 		{
