@@ -84,7 +84,6 @@ var Tick = new Class({
 	},
 	__start: function()
 	{
-		console.log(this.refreshRate());
 		this.interval = this.refresh.periodical(this.refreshRate());
 	},
 	__getCurrentTime: function()
