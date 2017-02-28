@@ -6,7 +6,8 @@ var Block = new Class({
 	Extends: Array2D,
 	initialize: function(size)
 	{
-		this.parent.type = 'Block';
+		this.type = 'Block';
+
 		this.defaultSize = function()
 		{
 			return {
@@ -15,6 +16,10 @@ var Block = new Class({
 			};
 		}
 
+		this.set(size);
+	},
+	set: function(size)
+	{
 		this.parent(size);
 	},
 	getSize: function()

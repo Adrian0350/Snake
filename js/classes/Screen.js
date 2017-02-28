@@ -1,10 +1,5 @@
 /**
  * Game Screen is an abstraction of a screen.
- *
- * @property object canvas              HTML Canvas object
- * @property string canvas_id           Canvas ID
- * @property object  size               Array containing Height and Width
- * @property string background_color    Color property in Hex string.
  */
 var Screen = new Class({
 	initialize: function(canvas, options)
