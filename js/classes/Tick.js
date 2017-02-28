@@ -2,20 +2,19 @@
  * Tick will be the game's life changer (literally).
  */
 var Tick = new Class({
-	initialize: function(ticks)
+	initialize: function(fps)
 	{
-		var DEFAULT_REFRESH_RATE = 100;           // 200 Milliseconds
-		var DEFAULT_TICKS_PER_SECOND = 1; // 1 Per second
-		var TIME_SECOND = 60;             // 1 Second.
+		var DEFAULT_TICKS_PER_SECOND = 10; // FOR LATER
+		var DEFAULT_FPS_PER_SECOND = 1; // 1 Per second
+		var TIME_SECOND = 1000;             // 1 Second.
 
 		this.type         = 'Ticker';
-		this.refresh_rate = DEFAULT_REFRESH_RATE;
-		this.ticks        = DEFAULT_TICKS_PER_SECOND;
-		this.next_tick    = false;
-		this.last_tick    = false;
+		this.refresh_rate = DEFAULT_FPS_PER_SECOND * TIME_SECOND;
+		this.fps          = DEFAULT_FPS_PER_SECOND;
 		this.paused       = false;
 		this.delegate     = null;
 
+		console.log(this.refresh_rate);
 		this.refreshRate = function()
 		{
 			return this.refresh_rate;
@@ -26,13 +25,13 @@ var Tick = new Class({
 		}
 		this.nextTick = function()
 		{
-			return Date.now() + (this.iteration() / this.ticks);
+			return Date.now() + (this.iteration() / this.fps);
 		}
 		this.status = function()
 		{
 			var status = {
 				'time': Date.now(),
-				'ticks': this.ticks,
+				'fps': this.fps,
 				'paused': this.paused,
 			};
 
@@ -43,15 +42,15 @@ var Tick = new Class({
 			this.delegate = delegate;
 		}
 
-		ticks = Math.floor(ticks);
-		if (!ticks || ticks < 0)
+		fps = Math.floor(fps);
+		if (!fps || fps < 0)
 		{
-			console.warn('Ticks must be in the range of 1-60.\n  Set to default: ' + DEFAULT_TICKS_PER_SECOND);
-			this.ticks = DEFAULT_TICKS_PER_SECOND;
+			console.warn('Ticks must be in the range of 1-60.\n  Set to default: ' + DEFAULT_FPS_PER_SECOND);
+			this.fps = DEFAULT_FPS_PER_SECOND;
 		}
 		else
 		{
-			this.ticks = ticks;
+			this.fps = fps;
 		}
 
 		var self = this;
@@ -59,14 +58,7 @@ var Tick = new Class({
 		{
 			self.status();
 
-			if (self.last_tick + self.refreshRate() >= self.next_tick)
-			{
-				self.next_tick = self.nextTick();
-				if (self.delegate)
-				{
-					self.delegate(self.status());
-				}
-			}
+			self.delegate(self.status());
 		}
 	},
 	start: function()
@@ -83,11 +75,11 @@ var Tick = new Class({
 	},
 	pause: function()
 	{
-		this.next_tick = null;
+
 	},
 	unpause: function()
 	{
-		this.next_tick = this.nextTick();
+
 	},
 	watch: function(delegate)
 	{
@@ -105,7 +97,6 @@ var Tick = new Class({
 	__start: function()
 	{
 		this.interval = this.refresh.periodical(this.refreshRate());
-		this.last_tick = this.__getCurrentTime();
 	},
 	__paused: function()
 	{
