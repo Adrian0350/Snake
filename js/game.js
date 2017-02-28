@@ -21,7 +21,7 @@ window.addEvents({
 		var ticker = new Tick(1);
 		ticker.start();
 		ticker.watch(function(status){
-			console.log(status);
+			console.log(status.time);
 		});
 	}
 });
