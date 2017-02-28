@@ -9,110 +9,55 @@
 var Screen = new Class({
 	initialize: function(canvas, options)
 	{
-		var DEFAULT_CANVAS_ID = 'SnakeGameCanvas';
-		var DEFAULT_CANVAS_CLASS = '';
-
 		this.type = 'Screen';
-		this.defaultCanvas = function()
+
+		var DEFAULT_CANVAS_ID    = 'SnakeGameCanvas';
+		var DEFAULT_CANVAS_CLASS = '';
+		var DEFAULT_CANVAS_SIZE  = 200;
+
+
+		this.__defaultScreenCanvas = function()
 		{
 			return new Element('canvas', {
-				id: DEFAULT_CANVAS_ID,
-				class: DEFAULT_CANVAS_CLASS
+				'id':     DEFAULT_CANVAS_ID,
+				'class':  DEFAULT_CANVAS_CLASS,
+				'height': DEFAULT_CANVAS_SIZE,
+				'width':  DEFAULT_CANVAS_SIZE
 			});
 		}
-		this.defaultSize = function()
+		this.__defaultScreenSize = function()
 		{
 			return {
-				height: 200,
-				width: 200
+				'square': true,
+				'height': DEFAULT_CANVAS_SIZE,
+				'width':  DEFAULT_CANVAS_SIZE
 			};
 		}
-		this.defaultColor = function()
+		this.__defaultScreenSnake = function()
 		{
-			return '#701A0A';
-		}
-
-		this.set(canvas, options);
-
-		var snakeOptions = {
-			size: 20,
-			color: '#fff'
-		};
-		this.elements = {
-			'Snake': new Snake(snakeOptions),
-			'SnakeFood': new Block(5)
-		};
-	},
-	set: function(canvas, options)
-	{
-		if (!isCanvas(canvas))
-		{
-			this.canvas = this.defaultCanvas();
-			console.warn('Invalid screen canvas -> ' + canvas);
-		}
-		if (options === undefined)
-		{
-			this.options = {
-				size: this.defaultSize(),
-				color: this.defaultColor()
+			var snakeOptions = {
+				size: DEFAULT_CANVAS_SIZE * 0.05, // 5%
+				color: '#dedede'
 			};
 
-			console.warn('Snake Options where not defined \n Predefined: ' + JSON.stringify(this.options));
+			return new Snake(snakeOptions);
 		}
-
-		this.canvas  = canvas;
-		this.options = options;
-
-		var color = this.options.color;
-
-		if (!isHexColor(color))
+		this.__setDefaults = function()
 		{
-			console.warn('Not a valid color: ' + color);
-			this.options.color = this.defaultColor();
+			this.size   = this.__defaultScreenSize();
+			this.canvas = this.__defaultScreenCanvas();
+			this.Snake  = this.__defaultScreenSnake();
 		}
 
-		this.__setScreen();
-	},
-	__setScreen: function()
-	{
-		this.size  = this.options.size;
-		this.color = this.options.color;
-
-		this.__setContext();
-	},
-	__setContext: function()
-	{
-		this.context = this.canvas.getContext('2d');
-		this.__setCanvas();
-	},
-	__setCanvas: function()
-	{
-		this.canvas.setStyles({
-			background: this.color,
-			height: this.size.height,
-			width: this.size.width
-		});
-	},
-	draw: function()
-	{
-		var position = {
-			x: 10,
-			y: 10
-		};
-		for (element in this.elements)
+		if (isCanvas(canvas))
 		{
-			var e = this.elements[element];
-			position.x = position.x + 5;
-			position.y = position.y + 5;
-
-			this.context.fillStyle = e.color;
-			this.context.fillRect(position.x, position.y, e.size, e.size);
-
-			console.log(this.elements[element]);
+			this.canvas = canvas;
 		}
-	},
-	setSnakeColor: function(color)
-	{
-		this.elements.Snake.setColor(color);
+		else
+		{
+			this.canvas = this.__defaultScreenCanvas();
+			console.warn('Invalid canvas, setting default');
+		}
+
 	}
 });

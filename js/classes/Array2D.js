@@ -23,73 +23,76 @@ var Array2D = new Class({
 		this.type        = 'Array2D';
 		this.defaultSize = function()
 		{
-			return 2;
-		}
-		this.defaultArray = function()
-		{
-			return [
-				[0, 0],
-				[0, 0]
-			];
+			return {
+				rows: 2,
+				columns: 2
+			};
 		}
 
-		if (size === undefined)
-		{
-			size = this.defaultSize();
-		}
-
-		// Self set()
 		this.set(size);
 	},
 	set: function(size)
 	{
+		if (size === undefined)
+		{
+			console.warn('Size object given is not a valid size object. \n size: ' + size);
+
+			size = this.defaultSize();
+
+			console.warn('Size has been set to default: ' + JSON.stringify(size));
+		}
+
+		size.rows    = Math.floor(size.rows);
+		size.columns = Math.floor(size.columns);
+
+		if (size.rows < 1 && size.rows < 1)
+		{
+			console.warn('Number of rows and columns are invalid.');
+			size = this.defaultSize();
+		}
+		if (size.rows < 1)
+		{
+			console.warn('Number of rows is invalid: ' + size.rows);
+			size.rows = 1
+		}
+		if (size.columns < 1)
+		{
+			console.warn('Number of columns is invalid: ' + size.columns);
+			size.columns = 1;
+		}
+
 		this.__setSize(size);
 	},
 	__setSize: function(size)
 	{
-		size = Math.floor(size);
-
-		if (size && size >= 2)
-		{
-			this.size = size
-		}
-		else
-		{
-			this.size = this.defaultSize();
-
-			if (!(size > 1))
-				console.warn('Variable given is not a valid size number. \n size : ' + size);
-			console.warn('Size has been set to default: ' + this.size);
-		}
+		this.size = size;
 
 		this.__setRows();
 	},
 	__setRows: function()
 	{
-		this.rows = this.size;
+		this.rows = this.size.rows;
 		this.__setColumns();
 	},
 	__setColumns: function()
 	{
-		this.columns = this.size;
+		this.columns = this.size.columns;
 		this.__setArray();
 	},
 	__setArray: function()
 	{
-		var array = [];
-		var depth = this.size;
+		var array   = [];
+		var rows    = this.rows;
+		var columns = this.columns;
 
-		for (var i = 1; i <= depth; i++)
+		for (var row = 0; row < rows; row++)
 		{
-			// X Axis
-			var xAxis = [];
-			while (xAxis.length != depth)
-			{
-				xAxis.push(0);
-			}
+			array[row] = Array();
 
-			// Y Axis
-			array.push(xAxis);
+			for (var column = 0; column < columns; column++)
+			{
+				array[row][column] = 0;
+			}
 		}
 
 		this.array = array;

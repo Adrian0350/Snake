@@ -3,11 +3,19 @@
  *
  */
 var Block = new Class({
-	Implements: Array2D,
+	Extends: Array2D,
 	initialize: function(size)
 	{
-		this.type = 'Block';
-		this.set(size);
+		this.parent.type = 'Block';
+		this.defaultSize = function()
+		{
+			return {
+				rows: 2,
+				columns: 2
+			};
+		}
+
+		this.parent(size);
 	},
 	getSize: function()
 	{
@@ -19,10 +27,10 @@ var Block = new Class({
 	},
 	getGraphicBlock: function()
 	{
-		var block = 'Size: ' + this.size + ' X ' + this.size + '\n\n';
+		var block = 'Size: ' + this.size.rows + ' X ' + this.size.columns + '\n\n';
 
-		this.array.forEach(function(xAxis, yAxis){
-			block += (yAxis+1) + ' -> ' + xAxis.join('   ') + '\n\n';
+		this.array.forEach(function(row, column){
+			block += (column+1) + ' -> ' + row.join('   ') + '\n\n';
 		});
 
 		return block;

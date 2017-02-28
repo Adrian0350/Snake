@@ -3,6 +3,13 @@ window.addEvents({
 	{
 		var canvas = $('gameScreen');
 
+		var snakeOptions = {
+			size: {
+				rows: 10,
+				columns: 2
+			},
+			color: '#dedede'
+		};
 		var screenOptions = {
 			size: {
 				height: 600,
@@ -10,12 +17,7 @@ window.addEvents({
 			}
 		};
 
-		var screen = new Screen(canvas, screenOptions);
-
-
-		console.log(screen.draw());
-		console.log(screen.setSnakeColor('#dedede'));
-		console.log(screen.draw());
+		var snake = new Snake(snakeOptions);
 
 	}
 });

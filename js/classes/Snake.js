@@ -11,7 +11,10 @@ var Snake = new Class({
 
 		this.defaultSize = function()
 		{
-			return 2;
+			return {
+				rows: 2,
+				columns: 2
+			};
 		}
 		this.defaultColor = function()
 		{
@@ -33,16 +36,31 @@ var Snake = new Class({
 
 			console.warn('Snake Options where not defined \n Predefined: ' + JSON.stringify(options));
 		}
-		var size = Math.floor(options.size);
+		var size = {
+			rows: Math.floor(options.size.rows),
+			columns: Math.floor(options.size.columns)
+		};
 
-		if (options.size >= 2)
+		if (size.rows < 2)
+		{
+			console.warn('Number of rows is not valid. Default set 2.');
+			this.size.rows = 2;
+		}
+
+		if (size.columns < 2)
+		{
+			console.warn('Number of columns is not valid. Default set 2.');
+			this.size.columns = 2;
+		}
+
+		if (size.rows >= 2 && size.columns >= 2)
 		{
 			this.size = size;
 		}
 		else
 		{
 			this.size = this.defaultSize();
-			console.warn('Options size is not a valid value.\n Setting default value: ' + this.size);
+			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(this.size));
 		}
 
 		if (isHexColor(options.color))
@@ -71,14 +89,7 @@ var Snake = new Class({
 	},
 	__setBody: function()
 	{
-		var node = 1;
-		this.body = [];
-
-		while (node <= this.size)
-		{
-			this.body.push(this.Node.array);
-			node++;
-		}
+		this.body = this.Node.array;
 	},
 	getBody: function()
 	{
@@ -98,7 +109,7 @@ var Snake = new Class({
 
 		if (isInt(size))
 		{
-			this.options.size += size;
+			this.options.size.rows += size;
 		}
 		else
 		{
@@ -109,6 +120,7 @@ var Snake = new Class({
 	},
 	setColor: function(color)
 	{
-		this.set({'color': color});
+		this.options.color = color;
+		this.set(this.options);
 	}
 });
