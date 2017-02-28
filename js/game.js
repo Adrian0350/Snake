@@ -18,10 +18,11 @@ window.addEvents({
 		};
 
 		var snake = new Snake(snakeOptions);
-		var ticker = new Tick(64);
+		var ticker = new Tick(2);
+
 		ticker.start();
 		ticker.watch(function(status){
-			console.log(status.ticks);
+			console.log(status);
 		});
 	}
 });

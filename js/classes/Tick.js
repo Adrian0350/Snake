@@ -16,10 +16,6 @@ var Tick = new Class({
 		{
 			return TIME_SECOND / this.ticks;
 		}
-		this.iteration = function()
-		{
-			return TIME_SECOND;
-		}
 		this.status = function()
 		{
 			var status = {
