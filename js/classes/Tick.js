@@ -4,7 +4,7 @@
 var Tick = new Class({
 	initialize: function(ticks)
 	{
-		var DEFAULT_TICKS_PER_SECOND = 100; // FOR LATER
+		var DEFAULT_TICKS_PER_SECOND = 1; // FOR LATER
 		var TIME_SECOND = 1000;             // 1 Second.
 
 		this.type         = 'Ticker';
@@ -14,7 +14,7 @@ var Tick = new Class({
 
 		this.refreshRate = function()
 		{
-			return this.ticks;
+			return TIME_SECOND / this.ticks;
 		}
 		this.iteration = function()
 		{
@@ -39,11 +39,11 @@ var Tick = new Class({
 		if (!ticks || ticks < 0)
 		{
 			console.warn('Ticks must be in the range of 1-64.\n  Set to default: ' + DEFAULT_TICKS_PER_SECOND);
-			this.ticks = TIME_SECOND / DEFAULT_TICKS_PER_SECOND;
+			this.ticks = DEFAULT_TICKS_PER_SECOND;
 		}
 		else
 		{
-			this.ticks = TIME_SECOND / ticks;
+			this.ticks = ticks;
 		}
 
 		var self = this;
@@ -81,6 +81,18 @@ var Tick = new Class({
 		}
 
 		this.callBack(delegate);
+	},
+	setTicks: function(ticks)
+	{
+		ticks = Math.floor(ticks);
+		if (ticks && ticks > 0)
+		{
+			this.__setTicks(ticks);
+		}
+	},
+	__setTicks: function(ticks)
+	{
+		this.ticks = ticks;
 	},
 	__start: function()
 	{
