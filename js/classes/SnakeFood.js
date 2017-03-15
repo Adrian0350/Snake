@@ -43,36 +43,35 @@ var SnakeFoodFood = new Class({
 
 		if (size.rows == size.columns && size.rows >= 2)
 		{
-			this.size = size;
+			options.size = size;
 		}
 		else
 		{
-			this.size = this.defaultSize();
+			options.size = this.defaultSize();
 			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(this.size));
 		}
 
-		if (isHexColor(options.color))
+		if (!isHexColor(options.color))
 		{
-			this.color = options.color;
+			options.color = this.defaultColor();
+			console.warn('Options color is not a valid hex color value.');
+			console.warn('Setting default value: ' + options.color);
 		}
 		else
 		{
-			this.color = this.defaultColor();
-			console.warn('Options color is not a valid hex color value.\n Setting default value: ' + this.color);
+			options.color = this.defaultColor();
 		}
 
-		this.options = {
-			size: this.size,
-			color: this.color
-		}
-
-
+		this.__setOptions(options);
+	},
+	__setOptions: function()
+	{
+		this.options = options;
 		this.__setBlock();
 	},
 	__setBlock: function()
 	{
 		this.Node = new Block(this.size);
-
 		this.__setBody();
 	},
 	__setBody: function()

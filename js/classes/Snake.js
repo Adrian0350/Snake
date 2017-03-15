@@ -46,13 +46,11 @@ var Snake = new Class({
 			console.warn('Number of rows is not valid. Default set 2.');
 			this.size.rows = 2;
 		}
-
 		if (size.columns < 2)
 		{
 			console.warn('Number of columns is not valid. Default set 2.');
 			this.size.columns = 2;
 		}
-
 		if (size.rows >= 2 && size.columns >= 2)
 		{
 			this.size = size;
@@ -62,29 +60,23 @@ var Snake = new Class({
 			this.size = this.defaultSize();
 			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(this.size));
 		}
-
-		if (isHexColor(options.color))
+		if (!isHexColor(options.color))
 		{
-			this.color = options.color;
-		}
-		else
-		{
-			this.color = this.defaultColor();
-			console.warn('Options color is not a valid hex color value.\n Setting default value: ' + this.color);
+			options.color = this.defaultColor();
+			console.warn('Options color is not a valid hex color value.');
+			console.warn('Setting default value: ' + options.color);
 		}
 
-		this.options = {
-			size: this.size,
-			color: this.color
-		}
-
-
-		this.__setBlock();
+		this.__setOptions(options);
 	},
+	__setOptions: function()
+	{
+		this.options = options;
+		this.__setBlock();
+	}
 	__setBlock: function()
 	{
 		this.Node = new Block(this.size);
-
 		this.__setBody();
 	},
 	__setBody: function()
