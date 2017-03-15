@@ -5,7 +5,7 @@ var Tick = new Class({
 	initialize: function(ticks)
 	{
 		var DEFAULT_TICKS_PER_SECOND = 1; // FOR LATER
-		var TIME_SECOND = 1000;             // 1 Second.
+		var TIME_SECOND = 1000;           // 1 Second.
 
 		this.type         = 'Ticker';
 		this.ticks        = TIME_SECOND / DEFAULT_TICKS_PER_SECOND;
@@ -67,7 +67,7 @@ var Tick = new Class({
 	},
 	watch: function(delegate)
 	{
-		if (typeof delegate == undefined)
+		if (typeof delegate === undefined)
 		{
 			this.__noDelegateError();
 		}
@@ -80,8 +80,7 @@ var Tick = new Class({
 	},
 	setTicks: function(ticks)
 	{
-		ticks = Math.floor(ticks);
-		if (ticks && ticks > 0)
+		if (ticks = Math.floor(ticks) && ticks > 0)
 		{
 			this.__setTicks(ticks);
 		}
@@ -94,16 +93,12 @@ var Tick = new Class({
 	{
 		this.interval = this.refresh.periodical(this.refreshRate());
 	},
-	__getCurrentTime: function()
-	{
-		return Date.now()
-	},
 	__noDelegateError: function()
 	{
-		throw 'Error: Callback was not defined.'
+		throw 'Error: Callback was not defined.';
 	},
 	__wrongDelegateError: function()
 	{
-		throw 'Error: Callback must be a function.'
+		throw 'Error: Callback must be a function.';
 	},
 });

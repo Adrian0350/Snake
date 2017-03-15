@@ -15,6 +15,12 @@
  *	| 0  0  0
  *	| 0  0  0
  *
+ * 3 X 6 Rectangle:
+ *    Y --------------
+ *	X 0  0  0  0  0  0
+ *	| 0  0  0  0  0  0
+ *	| 0  0  0  0  0  0
+ *
  */
 var Array2D = new Class({
 	initialize: function(size)
@@ -66,7 +72,6 @@ var Array2D = new Class({
 	__setSize: function(size)
 	{
 		this.size = size;
-
 		this.__setRows();
 	},
 	__setRows: function()
