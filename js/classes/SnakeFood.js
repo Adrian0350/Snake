@@ -50,16 +50,11 @@ var SnakeFoodFood = new Class({
 			options.size = this.defaultSize();
 			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(this.size));
 		}
-
 		if (!isHexColor(options.color))
 		{
 			options.color = this.defaultColor();
 			console.warn('Options color is not a valid hex color value.');
 			console.warn('Setting default value: ' + options.color);
-		}
-		else
-		{
-			options.color = this.defaultColor();
 		}
 
 		this.__setOptions(options);
