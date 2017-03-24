@@ -6,8 +6,8 @@
  */
 var Snake = new Class({
 	Implements: [
-		Action,
-		ElementPosition
+		ElementPosition,
+		Action
 	],
 	initialize: function(options)
 	{
