@@ -5,6 +5,7 @@
  * @property string color Color property in Hex string.
  */
 var Snake = new Class({
+	Implements: ElementPosition,
 	initialize: function(options)
 	{
 		this.type = 'Snake';
@@ -69,11 +70,11 @@ var Snake = new Class({
 
 		this.__setOptions(options);
 	},
-	__setOptions: function()
+	__setOptions: function(options)
 	{
 		this.options = options;
 		this.__setBlock();
-	}
+	},
 	__setBlock: function()
 	{
 		this.Node = new Block(this.size);
