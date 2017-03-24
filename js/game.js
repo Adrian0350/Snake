@@ -18,13 +18,8 @@ window.addEvents({
 		};
 
 		var snake = new Snake(snakeOptions);
-		var ticker = new Tick(2);
 
 
-		console.log(snake.setPosition({x: 10, y: 15}));
-		//ticker.start();
-		ticker.watch(function(status){
-			console.log(status);
-		});
+		console.log(snake.setPosition({x: '-6', y: 15}));
 	}
 });

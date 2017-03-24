@@ -1,3 +1,6 @@
+/**
+ * ElementPosition -> The foundation for self reference.
+ */
 var ElementPosition = new Class({
 	initialize: function()
 	{
@@ -13,13 +16,13 @@ var ElementPosition = new Class({
 	},
 	__setPosition: function(pos)
 	{
-		if (!pos)
+		pos.x = Math.floor(Math.abs(pos.x));
+		pos.y = Math.floor(Math.abs(pos.y));
+
+		if ((pos.x < 0 || pos.y < 0))
 		{
-			this.position = this.defaultPosition();
-		}
-		if (pos.x >! -1 || !pos.y >! -1)
-		{
-			this.position = this.defaultPosition();
+			pos = this.defaultPosition();
+			console.warn('Position not valid, setting default: ' + JSON.stringify(pos));
 		}
 
 		this.position = pos;
