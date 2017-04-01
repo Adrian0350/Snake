@@ -31,7 +31,7 @@ var Screen = new Class({
 		this.__defaultScreenSnake = function()
 		{
 			var snakeOptions = {
-				size: DEFAULT_CANVAS_SIZE * 0.05, // 5%
+				size: DEFAULT_CANVAS_SIZE * 0.10, // 10%
 				color: '#dedede'
 			};
 
@@ -54,5 +54,11 @@ var Screen = new Class({
 			console.warn('Invalid canvas, setting default');
 		}
 
+		this.Context = this.canvas.getContext('2d');
+	},
+	draw: function(draw)
+	{
+		this.Context.fillStyle = draw.color;
+		this.Context.fillRect(draw.x, draw.y, draw.height, draw.width);
 	}
 });

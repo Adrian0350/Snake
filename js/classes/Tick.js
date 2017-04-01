@@ -45,8 +45,6 @@ var Tick = new Class({
 		var self = this;
 		this.refresh = function()
 		{
-			self.status();
-
 			if (self.delegate)
 			{
 				self.delegate(self.status());

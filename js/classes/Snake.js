@@ -5,10 +5,7 @@
  * @property string color Color property in Hex string.
  */
 var Snake = new Class({
-	Implements: [
-		ElementPosition,
-		Action
-	],
+	Extends: ElementPosition,
 	initialize: function(options)
 	{
 		this.type = 'Snake';
@@ -24,7 +21,6 @@ var Snake = new Class({
 		{
 			return '#FFFFFF';
 		}
-
 
 		this.set(options);
 	},
@@ -48,21 +44,21 @@ var Snake = new Class({
 		if (size.rows < 2)
 		{
 			console.warn('Number of rows is not valid. Default set 2.');
-			this.size.rows = 2;
+			options.size.rows = 2;
 		}
 		if (size.columns < 2)
 		{
 			console.warn('Number of columns is not valid. Default set 2.');
-			this.size.columns = 2;
+			options.size.columns = 2;
 		}
 		if (size.rows >= 2 && size.columns >= 2)
 		{
-			this.size = size;
+			options.size = size;
 		}
 		else
 		{
-			this.size = this.defaultSize();
-			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(this.size));
+			options.size = this.defaultSize();
+			console.warn('Options size is not a valid value.\n Setting default value: ' + JSON.stringify(options.size));
 		}
 		if (!isHexColor(options.color))
 		{
@@ -72,20 +68,30 @@ var Snake = new Class({
 		}
 
 		this.__setOptions(options);
+		this.__setPosition({'x': 20, 'y': 20});
 	},
 	__setOptions: function(options)
 	{
 		this.options = options;
+		this.__setSize();
+	},
+	__setSize: function()
+	{
+		this.size = this.options.size;
 		this.__setBlock();
 	},
 	__setBlock: function()
 	{
-		this.Node = new Block(this.size);
+		this.Node = new Block(this.options.size);
 		this.__setBody();
 	},
 	__setBody: function()
 	{
 		this.body = this.Node.array;
+	},
+	__setPosition: function(pos)
+	{
+		this.parent(pos);
 	},
 	getBody: function()
 	{
@@ -110,9 +116,8 @@ var Snake = new Class({
 		else
 		{
 			console.warn("Snake can't grow that - " + size + " - much!");
+			this.set(this.options);
 		}
-
-		this.set(this.options);
 	},
 	setColor: function(color)
 	{
