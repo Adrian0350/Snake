@@ -1,5 +1,4 @@
 var SnakeGame = new Class({
-	Implements: Chain,
 	initialize: function(canvas)
 	{
 		this.type = 'SnakeGame';
@@ -18,18 +17,16 @@ var SnakeGame = new Class({
 			}
 		};
 
-		this.set(3, canvas);
+		this.set(1, canvas);
 	},
 	set: function(ticks, canvas)
 	{
 		this.Tick   = new Tick(ticks);
 		this.Screen = new Screen(canvas, this.screenOptions);
 		this.Snake  = this.Screen.__defaultScreenSnake();
-
 	},
 	start: function()
 	{
-		this.Tick.start();
 		this.__start();
 	},
 	stop: function()
@@ -42,6 +39,8 @@ var SnakeGame = new Class({
 		this.Tick.watch(function(status){
 			self.__draw();
 		});
+
+		this.Tick.start();
 	},
 	__draw: function()
 	{
@@ -56,7 +55,10 @@ var SnakeGame = new Class({
 			color: snakeColor
 		}
 
-		this.Snake.grow(3);
 		this.Screen.draw(draw);
 	},
+	moveSnake: function(direction)
+	{
+		this.Snake.move(direction);
+	}
 });

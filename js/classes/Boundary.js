@@ -1,13 +1,13 @@
 var Boundary = new Class({
 	initialize: function()
 	{
-
+		this.boundary = this.__boundary();
 	},
 	__boundary: function()
 	{
 		return {
-			this.x,
-			this.y
+			x: this.x,
+			y: this.y
 		}
 	},
 	getBoundary: function()

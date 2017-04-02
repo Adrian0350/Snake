@@ -5,7 +5,7 @@
  * @property string color Color property in Hex string.
  */
 var Snake = new Class({
-	Extends: ElementPosition,
+	Extends: ActionEngine,
 	initialize: function(options)
 	{
 		this.type = 'Snake';
@@ -105,6 +105,10 @@ var Snake = new Class({
 	{
 		return this.color;
 	},
+	move: function(direction)
+	{
+		this.parent(direction);
+	},
 	grow: function(size)
 	{
 		size = Math.floor(size);
@@ -121,7 +125,6 @@ var Snake = new Class({
 	},
 	setColor: function(color)
 	{
-		this.options.color = color;
-		this.set(this.options);
+		this.set(this.options.color = color);
 	}
 });

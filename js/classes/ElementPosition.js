@@ -25,7 +25,7 @@ var ElementPosition = new Class({
 			console.warn('Position not valid, setting default: ' + JSON.stringify(pos));
 		}
 
-		this.position = pos;
+		return this.position = pos;
 	},
 	getPosition: function()
 	{
@@ -33,7 +33,6 @@ var ElementPosition = new Class({
 	},
 	setPosition: function(pos)
 	{
-		this.__setPosition(pos);
-		return this.getPosition();
+		return this.__setPosition(pos);
 	}
 });

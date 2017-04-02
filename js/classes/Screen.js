@@ -2,6 +2,7 @@
  * Game Screen is an abstraction of a screen.
  */
 var Screen = new Class({
+	Extends: Boundary,
 	initialize: function(canvas, options)
 	{
 		this.type = 'Screen';
@@ -54,11 +55,26 @@ var Screen = new Class({
 			console.warn('Invalid canvas, setting default');
 		}
 
+		this.setBoundary();
 		this.Context = this.canvas.getContext('2d');
 	},
 	draw: function(draw)
 	{
+		this.__prepareDrawing();
+
 		this.Context.fillStyle = draw.color;
 		this.Context.fillRect(draw.x, draw.y, draw.height, draw.width);
+	},
+	__prepareDrawing: function()
+	{
+		this.Context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	},
+	setBoundary: function()
+	{
+		this.parent(this.canvas.height, this.canvas.width);
+	},
+	outOfBoundary: function()
+	{
+		
 	}
 });
