@@ -32,10 +32,11 @@ var Screen = new Class({
 		this.__defaultScreenSnake = function()
 		{
 			var snakeOptions = {
-				size: DEFAULT_CANVAS_SIZE * 0.10, // 10%
+				size: DEFAULT_CANVAS_SIZE * 0.30, // 10%
 				color: '#dedede'
 			};
 
+			console.log(snakeOptions);
 			return new Snake(snakeOptions);
 		}
 		this.__setDefaults = function()
@@ -75,6 +76,6 @@ var Screen = new Class({
 	},
 	outOfBoundary: function()
 	{
-		
+
 	}
 });

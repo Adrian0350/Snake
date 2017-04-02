@@ -5,8 +5,8 @@ var SnakeGame = new Class({
 
 		this.snakeOptions = {
 			size: {
-				rows: 10,
-				columns: 2
+				rows: 5,
+				columns: 5
 			},
 			color: '#dedede'
 		};
@@ -17,13 +17,13 @@ var SnakeGame = new Class({
 			}
 		};
 
-		this.set(5, canvas);
+		this.set(10, canvas);
 	},
 	set: function(ticks, canvas)
 	{
 		this.Tick   = new Tick(ticks);
 		this.Screen = new Screen(canvas, this.screenOptions);
-		this.Snake  = this.Screen.__defaultScreenSnake();
+		this.Snake  = new Snake(this.snakeOptions);
 	},
 	start: function()
 	{

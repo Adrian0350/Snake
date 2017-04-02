@@ -8,6 +8,12 @@ window.addEvents({
 	},
 	'keydown':function(event)
 	{
+		if (this.retrieve('pressed') === +event.code)
+		{
+			return;
+		}
+		this.store('pressed', +event.code)
+
 		if (+event.code === 37)
 		{
 			window.Game.moveSnake('left');
