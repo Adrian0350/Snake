@@ -7,22 +7,27 @@ var ActionEngine = new Class({
 	},
 	move: function(direction)
 	{
-		if (direction === 'up')
+		if (!direction)
 		{
-			this.direction = direction;
-			return this.position.x++;
+			direction = this.direction;
 		}
-		if (direction === 'left')
+
+		if (direction === 'up')
 		{
 			this.direction = direction;
 			return this.position.y--;
 		}
-		if (direction === 'down')
+		if (direction === 'left')
 		{
 			this.direction = direction;
 			return this.position.x--;
 		}
 		if (direction === 'right')
+		{
+			this.direction = direction;
+			return this.position.x++;
+		}
+		if (direction === 'down')
 		{
 			this.direction = direction;
 			return this.position.y++;

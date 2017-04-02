@@ -17,7 +17,7 @@ var SnakeGame = new Class({
 			}
 		};
 
-		this.set(1, canvas);
+		this.set(5, canvas);
 	},
 	set: function(ticks, canvas)
 	{
@@ -55,6 +55,7 @@ var SnakeGame = new Class({
 			color: snakeColor
 		}
 
+		this.Snake.move();
 		this.Screen.draw(draw);
 	},
 	moveSnake: function(direction)

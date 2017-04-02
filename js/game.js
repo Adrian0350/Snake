@@ -4,29 +4,25 @@ window.addEvents({
 		var canvas = $('gameScreen');
 		window.Game = new SnakeGame(canvas);
 
-		Game.start();
+		window.Game.start();
 	},
 	'keydown':function(event)
 	{
 		if (+event.code === 37)
 		{
-			console.log('left');
-			window.Game.Snake.move('left');
+			window.Game.moveSnake('left');
 		}
 		if (+event.code === 38)
 		{
-			console.log('up');
-			window.Game.Snake.move('up');
+			window.Game.moveSnake('up');
 		}
 		if (+event.code === 39)
 		{
-			console.log('right');
-			window.Game.Snake.move('right');
+			window.Game.moveSnake('right');
 		}
 		if (+event.code === 40)
 		{
-			console.log('down');
-			window.Game.Snake.move('down');
+			window.Game.moveSnake('down');
 		}
 	}
 });
