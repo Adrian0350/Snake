@@ -9,6 +9,7 @@ var Snake = new Class({
 	initialize: function(options)
 	{
 		this.type = 'Snake';
+		this.direction = 'right';
 
 		this.defaultSize = function()
 		{
@@ -77,7 +78,9 @@ var Snake = new Class({
 	},
 	__setSize: function()
 	{
-		this.size = this.options.size;
+		this.size   = this.options.size;
+		this.moveBy = this.size.rows;
+
 		this.__setBlock();
 	},
 	__setBlock: function()

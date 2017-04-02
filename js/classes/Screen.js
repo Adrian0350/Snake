@@ -36,7 +36,6 @@ var Screen = new Class({
 				color: '#dedede'
 			};
 
-			console.log(snakeOptions);
 			return new Snake(snakeOptions);
 		}
 		this.__setDefaults = function()
