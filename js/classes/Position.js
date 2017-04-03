@@ -1,7 +1,7 @@
 /**
- * ElementPosition -> The foundation for self reference.
+ * Position -> The foundation for self reference.
  */
-var ElementPosition = new Class({
+var Position = new Class({
 	initialize: function()
 	{
 		this.defaultPosition = function()

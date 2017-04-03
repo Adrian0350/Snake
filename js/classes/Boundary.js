@@ -1,18 +1,14 @@
 var Boundary = new Class({
 	initialize: function()
 	{
-		this.boundary = this.__boundary();
-	},
-	__boundary: function()
-	{
-		return {
-			x: this.x,
-			y: this.y
+		this.boundary = {
+			'x':0,
+			'y':0
 		}
 	},
 	getBoundary: function()
 	{
-		return this.__boundary();
+		return this.boundary;
 	},
 	setBoundary: function(x, y)
 	{
@@ -25,11 +21,9 @@ var Boundary = new Class({
 			y = 0;
 		}
 
-		this.x        = x;
-		this.y        = y;
 		this.boundary = {
-			x: this.x,
-			y: this.y
+			'x': x,
+			'y': y
 		}
 	}
 });

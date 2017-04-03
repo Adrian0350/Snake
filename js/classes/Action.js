@@ -1,8 +1,8 @@
-var ActionEngine = new Class({
-	Implements: ElementPosition,
+var Action = new Class({
+	Implements: Position,
 	initialize: function()
 	{
-		this.type      = 'ActionEngine';
+		this.type      = 'Action';
 		this.direction = 'left';
 		this.moveBy    = 1;
 	},
